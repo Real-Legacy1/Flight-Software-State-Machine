@@ -1,16 +1,28 @@
- # This is a sample Python script.
+from enum import Enum
+import random
+import time
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class SystemState(Enum):
+    BOOT = "BOOT"
+    IDLE = "IDLE"
+    ACTIVE = "ACTIVE"
+    SAFE_MODE = "SAFE_MODE"
+
+class FlightSystem:
+    def __init__(self):
+        self.current_state = SystemState.BOOT
+        self.temperature = 22.0
+        self.battery = 100.0
+        self.fault = False
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    def boot(self):
+        print("Booting...")
+        time.sleep(1)
+        self.current_state = SystemState.IDLE
+        print("System is now IDLE.")
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    def generate_telemetry(self):
+        print("Generating telemetry...")
+        time.sleep(1)
+        print("State: " + self.current_state.value +  " | Temperature: " + str(self.temperature) + " | Battery: " + str(self.battery) + " | Fault: " + str(self.fault))
